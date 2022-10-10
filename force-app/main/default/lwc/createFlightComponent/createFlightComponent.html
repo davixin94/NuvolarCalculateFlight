@@ -1,0 +1,44 @@
+<template>
+    <lightning-button variant="neutral" label="Create Flight" title="Create Flight" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open" if:true={showModal}>
+        <div class="slds-modal__container">
+          <div class="slds-modal__header">
+            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Create Flight</h1>
+          </div>
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <lightning-combobox 
+              name="Departure"
+              label="Departure Airport"
+              placeholder="Select Departure Airport"
+              options={listAirports}
+              onchange={setDeparture}></lightning-combobox>
+              <lightning-combobox
+              name="Arrival"
+              label="Arrival Airport"
+              placeholder="Select Arrival Airport"
+              options={listAirports}
+              onchange={setArrival}></lightning-combobox>
+          </div>
+          <div class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleCancel}>Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={saveFlight}>Save</button>
+          </div>
+        </div>
+      </section>
+      <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open" if:true={showModalConfirmation}>
+        <div class="slds-modal__container">
+          <div class="slds-modal__header">
+            <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Confirm Flight</h1>
+          </div>
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+            <p>Departure: (<lightning-formatted-text value={departure} ></lightning-formatted-text>) {departureLabel}</p>
+            <p>Arrival: (<lightning-formatted-text value={arrival} ></lightning-formatted-text>) {arrivalLabel}</p>
+            <p>Distance: <lightning-formatted-text value={finalDistance} ></lightning-formatted-text> KM</p>
+          </div>
+          <div class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleCancel}>Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={confirmFlight}>Save</button>
+          </div>
+        </div>
+      </section>
+</template>
